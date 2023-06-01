@@ -24,7 +24,7 @@ const TodoForm = () => {
             setTodo({title: '', detail:''})
             showAlert('success',`Todo with id ${todo.id} is added successfully`)
         } else{
-            const collectionRef = collection(db, "todos")
+            const collectionRef = collection(db, "todos") 
             const docRef = await addDoc(collectionRef, { ...todo, timestamp: serverTimestamp()})
             setTodo({title: '', detail:''})
             showAlert('success',`Todo with id ${docRef.id} is added successfully`)
@@ -48,18 +48,33 @@ const TodoForm = () => {
 
     },[]);
     return ( 
-         <div ref= {inputAreaRef}> 
-            <pre>{JSON.stringify(todo,null, '\t')}</pre>
-            <TextField fullWidth label="title" margin= "normal"
-                value = {todo.title}
-                onChange={e => setTodo({ ...todo, title: e.target.value})}
-            />  
-            <TextField fullWidth label="detail" multiline maxRows= {4}
-                value = {todo.detail}
-                onChange={e => setTodo({ ...todo, detail: e.target.value})}
-            /> 
-            <Button onClick={onSubmit} variant="contained" sx={{mt: 3}}>{todo.hasOwnProperty('timestamp') ? 'Update todo' : 'Add a new todo'}</Button>
-         </div>
+
+        <div>
+
+            <div ref= {inputAreaRef}>
+                <div style={{margin:"10px"}}>
+                    <input fullWidth label="title" margin= "normal" value = {todo.title}  onChange={e => setTodo({ ...todo, title: e.target.value})}/> 
+                </div>
+                <div  >
+                    <input fullWidth label="detail" multiline maxRows= {4} value = {todo.detail} onChange={e => setTodo({ ...todo, detail: e.target.value})}/> 
+                </div>
+                <Button onClick={onSubmit} variant="contained" sx={{mt: 3}}>{todo.hasOwnProperty('timestamp') ? 'Update todo' : 'Add a new todo'}</Button>
+            </div>
+
+            {/* <div ref= {inputAreaRef}> 
+                        <pre>{JSON.stringify(todo,null, '\t')}</pre>
+                        <TextField fullWidth label="title" margin= "normal"
+                            value = {todo.title}
+                            onChange={e => setTodo({ ...todo, title: e.target.value})}
+                        />  
+                        <TextField fullWidth label="detail" multiline maxRows= {4}
+                            value = {todo.detail}
+                            onChange={e => setTodo({ ...todo, detail: e.target.value})}
+                        /> 
+                        <Button onClick={onSubmit} variant="contained" sx={{mt: 3}}>{todo.hasOwnProperty('timestamp') ? 'Update todo' : 'Add a new todo'}</Button>
+                    </div> */}
+        </div>
+         
     )
 }
 
