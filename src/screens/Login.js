@@ -37,8 +37,8 @@ const Login = () => {
         const password = e.target.elements.password.value;
         const rol = e.target.elements.rol.value
 
-        console.log("submit", email, password, rol);
-        registrarUsuario(email, password, rol)
+        console.log("submit", email, password, rol); 
+        
         if(isRegistrando){
             //registrar 
             console.log("se registrara usuario")
@@ -46,7 +46,12 @@ const Login = () => {
         }else {
             //login
             console.log("se logeara usuario")
+            console.log(auth)
+            console.log(email)
+            console.log(password)
+            console.log("-----------------")
             signInWithEmailAndPassword(auth, email, password)
+            console.log("---------FIN--------")
         }
     }
 
